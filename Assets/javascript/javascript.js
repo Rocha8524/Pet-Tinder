@@ -23,8 +23,18 @@ pf.animal.search("dogs")
 /// Wiki pulling API code 
 var xhr = new XMLHttpRequest();
 
+
+
 // able to change topic between 'xxx' in link. currently set to volkswagen
-var url = "https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&generator=search&gsrnamespace=0&gsrlimit=2&gsrsearch='Volkswagen'";
+// "https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&generator=search&gsrnamespace=0&gsrlimit=2&gsrsearch='volkswagen'";
+
+
+ var searchTopic;
+ searchTopic = "ford";
+//  search topic to be in quotes 
+var url = "https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&generator=search&gsrnamespace=0&gsrlimit=2&gsrsearch=" + searchTopic;
+
+
 
 // Open a new connection, using the GET request on the URL endpoint
 // Providing 3 arguments (GET/POST, The URL, Async True/False)
