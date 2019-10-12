@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="Assets/CSS/style.css">
     <title>user matches</title>
 
-<body class="text-center"
+<body class="container , text-center"
     background="Assets/Media/depositphotos_180529816-stock-photo-pets-texture-background-raster.jpg">
 
     <div id="title" class="jumbotron">
@@ -40,42 +40,36 @@
         </header>
     </div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-                <div id="searchedAnimal"></div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 id="pet-breed"></h5>
             </div>
-            <div class="col-md-4"></div>
-        </div><br>
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
-                <p>article</p>
-            </div>
-            <div class="col-md-1"></div>
-        </div><br>
-        <div class="row">
-            <div class="col-md-4">
-                <p>button</p>
-            </div>
-            <div class="col-md-4">
-            </div>
-            <div class="col-md-4">
-                <p>button</p>
-            </div>
-        </div><br>
+            <div id="pet-images"></div>
+            <hr>
 
-        <footer class="jumbotron">
-            <strong>
-                <h4>© Rutgers Bootcamp Project #1 2019</h4>
-            </strong>
-        </footer>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script src="https://unpkg.com/@petfinder/petfinder-js/dist/petfinder.min.js"></script>
-        <script src="Assets/javascript/javascript.js"></script>
-    </body>
+            <div class="card-text">
+                <p id="wiki-info">Evil Little Fuckers</p>
+            </div>
+
+            <div class="card-footer">
+                <button id="reject-animal" type="button" class="btn btn-warning">Reject</button>
+                <button id="approve-animal" type="button" class="btn btn-primary">Accept</button>
+            </div>
+        </div><br>
+    </div>
+
+    <footer class="jumbotron">
+        <strong>
+            <h4>© Rutgers Bootcamp Project #1 2019</h4>
+        </strong>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/@petfinder/petfinder-js/dist/petfinder.min.js"></script>
+    <script src="Assets/javascript/javascript.js"></script>
+</body>
+
 </html>
