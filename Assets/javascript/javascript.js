@@ -1,3 +1,6 @@
+var animalIndex  = 0;
+var animalBreeds = [];
+var listOfBreeds;
 var pf = new petfinder.Client({ apiKey: "OtOAvPPs5IfYjeg1yJ697I85pHRMkUZN3cTmFWoNp8U0AZIrp4", secret: "OhXZcmAgBeyDIUVmIJRqEFBOX6XYdZu59k7mXDPn" });
 pf.animal.search("dogs")
     .then(function (response) {
@@ -7,18 +10,18 @@ pf.animal.search("dogs")
         console.log("results", results)
         showAnimals(results);
 
-        var listOfBreeds = showAnimals(results);
+        listOfBreeds = showAnimals(results);
         console.log("listOfBreeds", listOfBreeds);
 
-        showOneAnimal(listOfBreeds[0]);
-        wikiInfo(listOfBreeds[0].breeds.primary);
+        showOneAnimal(listOfBreeds[animalIndex]);
+        wikiInfo(listOfBreeds[animalIndex].breeds.primary);
     })
     .catch(function (error) {
         // Handle the error
     });
 
 function showAnimals(animalData) {
-    var animalBreeds = [];
+    
     for (var i = 0; i < animalData.length; i++) {
         if (animalData[i].photos.length > 0) {
             animalBreeds.push(animalData[i]);
@@ -30,58 +33,28 @@ function showAnimals(animalData) {
 function showOneAnimal(animalData) {
     var animalImage = $("<img>");
     animalImage.attr("src", animalData.photos[0].medium);
-    $("#pet-images").prepend(animalImage);
+    $("#pet-images").html(animalImage);
 }
 
 function wikiInfo(animalBreed) {
-    var animalBreedInfo = $("<p>");
-    animalBreedInfo.text(animalBreed);
-    $("#wiki-info").prepend(animalBreedInfo);
+    $.ajax({
+        url: "https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=" + animalBreed,
+        method: "GET"
+    }).then(function (response) {
+        var animalArtical = response.query.pages[Object.keys(response.query.pages)[0]].extract;
+        var animalBreedInfo = $("<p>");
+        var animalArticalInfo = $("<p>");
+        animalBreedInfo.text(animalBreed);
+        animalArticalInfo.text(animalArtical);
+        $("#wiki-info").html(animalBreedInfo);
+        $("#wiki-info").append(animalArticalInfo);
+    })
 }
 
-/// Wiki pulling API code 
-var xhr = new XMLHttpRequest();
-
-
-
-// able to change topic between 'xxx' in link. currently set to volkswagen
-// "https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&generator=search&gsrnamespace=0&gsrlimit=2&gsrsearch='volkswagen'";
-
-
-var searchTopic;
-searchTopic = "ford";
-//  search topic to be in quotes 
-var url = "https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&generator=search&gsrnamespace=0&gsrlimit=2&gsrsearch=" + searchTopic;
-
-
-
-// Open a new connection, using the GET request on the URL endpoint
-// Providing 3 arguments (GET/POST, The URL, Async True/False)
-xhr.open('GET', url, true);
-
-// Once request has loaded...
-xhr.onload = function () {
-    // Parse the request into JSON
-    var data = JSON.parse(this.response);
-
-    // Log the data object
-    console.log(data);
-
-    // Log the page objects
-    console.log(data.query.pages)
-
-    // Loop through the data object
-    // Pulling out the titles of each page
-    for (var i in data.query.pages) {
-        console.log(data.query.pages[i].title);
-
-
-
-        var test123 = data.query.pages;
-
-        $("#bunny-search").append(test123);
-    }
-}
-
-// Send request to the server
-xhr.send();
+$("#reject-animal").on("click",function(){
+    animalIndex++
+    console.log(animalBreeds[animalIndex]);
+    showOneAnimal(animalBreeds[animalIndex]);
+    wikiInfo(listOfBreeds[animalIndex].breeds.primary)
+    console.log(listOfBreeds[animalIndex].breeds.primary)
+})
