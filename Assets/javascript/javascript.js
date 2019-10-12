@@ -1,24 +1,43 @@
-var pf = new petfinder.Client({apiKey: "OtOAvPPs5IfYjeg1yJ697I85pHRMkUZN3cTmFWoNp8U0AZIrp4", secret: "OhXZcmAgBeyDIUVmIJRqEFBOX6XYdZu59k7mXDPn"});
+var pf = new petfinder.Client({ apiKey: "OtOAvPPs5IfYjeg1yJ697I85pHRMkUZN3cTmFWoNp8U0AZIrp4", secret: "OhXZcmAgBeyDIUVmIJRqEFBOX6XYdZu59k7mXDPn" });
 pf.animal.search("dogs")
-   .then(function (response) {
-     console.log(response);
-       // Do something with response.data.animals
-       var results = response.data.animals;
-       showAnimals(results);
-   })
-   .catch(function (error) {
-       // Handle the error
-   });
+    .then(function (response) {
+        console.log(response);
+        // Do something with response.data.animals
+        var results = response.data.animals;
+        console.log("results", results)
+        showAnimals(results);
 
-    function showAnimals(animalData){
-      for (var i = 0; i < animalData.length; i++) {
-        var animalImage = $("<img>");
-        animalImage.attr("src", animalData[i].photos[0].medium);
-        $("#searchedAnimal").prepend(animalImage);
+        var listOfBreeds = showAnimals(results);
+        console.log("listOfBreeds", listOfBreeds);
+
+        showOneAnimal(listOfBreeds[0]);
+        wikiInfo(listOfBreeds[0].breeds.primary);
+    })
+    .catch(function (error) {
+        // Handle the error
+    });
+
+function showAnimals(animalData) {
+    var animalBreeds = [];
+    for (var i = 0; i < animalData.length; i++) {
+        if (animalData[i].photos.length > 0) {
+            animalBreeds.push(animalData[i]);
         }
     }
+    return animalBreeds;
+}
 
+function showOneAnimal(animalData) {
+    var animalImage = $("<img>");
+    animalImage.attr("src", animalData.photos[0].medium);
+    $("#pet-images").prepend(animalImage);
+}
 
+function wikiInfo(animalBreed) {
+    var animalBreedInfo = $("<p>");
+    animalBreedInfo.text(animalBreed);
+    $("#wiki-info").prepend(animalBreedInfo);
+}
 
 /// Wiki pulling API code 
 var xhr = new XMLHttpRequest();
@@ -29,8 +48,8 @@ var xhr = new XMLHttpRequest();
 // "https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&generator=search&gsrnamespace=0&gsrlimit=2&gsrsearch='volkswagen'";
 
 
- var searchTopic;
- searchTopic = "ford";
+var searchTopic;
+searchTopic = "ford";
 //  search topic to be in quotes 
 var url = "https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&generator=search&gsrnamespace=0&gsrlimit=2&gsrsearch=" + searchTopic;
 
@@ -41,7 +60,7 @@ var url = "https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&
 xhr.open('GET', url, true);
 
 // Once request has loaded...
-xhr.onload = function() {
+xhr.onload = function () {
     // Parse the request into JSON
     var data = JSON.parse(this.response);
 
@@ -58,9 +77,9 @@ xhr.onload = function() {
 
 
 
-    var test123 = data.query.pages;
-     
-    $("#bunny-search").append(test123);
+        var test123 = data.query.pages;
+
+        $("#bunny-search").append(test123);
     }
 }
 
