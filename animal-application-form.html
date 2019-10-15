@@ -43,7 +43,7 @@
         <h2>Pet Application Form</h2>
         <hr>
 
-        <form>
+        <form action="MAILTO:rocha8524@gmail.com" method="post" enctype="text/plain">
             <div class="form-row , justify-content-center">
                 <div class="col-md-6">
                     <strong><label class="exampleFormControlInput1">First Name</label></strong>
@@ -57,27 +57,27 @@
             </div>
 
             <div class="form-group">
-                <label for="inputAddress">Address</label>
+                <strong><label for="inputAddress">Address</label></strong>
                 <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
             </div>
             <div class="form-group">
-                <label for="inputAddress2">Address 2</label>
+                <strong><label for="inputAddress2">Address 2</label></strong>
                 <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="inputCity">City</label>
+                    <strong><label for="inputCity">City</label></strong>
                     <input type="text" class="form-control" id="inputCity">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="inputState">State</label>
+                    <strong><label for="inputState">State</label></strong>
                     <select id="inputState" class="form-control">
                         <option selected>Choose...</option>
                         <option>...</option>
                     </select>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="inputZip">Zip</label>
+                    <strong><label for="inputZip">Zip</label></strong>
                     <input type="text" class="form-control" id="inputZip">
                 </div>
             </div>
@@ -102,23 +102,25 @@
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="18"></textarea>
                 </div>
             </div>
-            <div class="form-check">
+            <!--<div class="form-check">
                 <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
                 <label class="form-check-label" for="invalidCheck3">
                   Agree to terms and conditions
                 </label>
-            </div>
+            </div>-->
         </form>
     </div>
     <br>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button id="send-to-email" type="submit" class="btn btn-primary">Submit</button>
 
     <br><br>
 
     <footer class="jumbotron , text-center">
         <h4>© Rutgers Bootcamp Project 1 2019</h4>
     </footer>
+
+<script>"Assets\javascript\javascriptEmail.php"</script>
 
 </body>
 
